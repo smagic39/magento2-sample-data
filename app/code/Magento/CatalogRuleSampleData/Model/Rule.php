@@ -8,7 +8,6 @@ namespace Magento\CatalogRuleSampleData\Model;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\CatalogRule\Model\RuleFactory as RuleFactory;
 use Magento\CatalogRule\Model\Rule\JobFactory as JobFactory;
-use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\App\ObjectManager;
 
 /**
@@ -63,7 +62,7 @@ class Rule
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
      * @param \Magento\Store\Model\WebsiteFactory $websiteFactory
-     * @param Json $serializer Optional parameter to preserve backward compatibility
+     * @param  \Zend\Serializer\Adapter\Json $serializer Optional parameter to preserve backward compatibility
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -72,7 +71,7 @@ class Rule
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Customer\Model\GroupFactory $groupFactory,
         \Magento\Store\Model\WebsiteFactory $websiteFactory,
-        Json $serializer = null
+        \Zend\Serializer\Adapter\Json $serializer
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -81,7 +80,7 @@ class Rule
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->groupFactory = $groupFactory;
         $this->websiteFactory = $websiteFactory;
-        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
+        $this->serializer = $serializer;
     }
 
     /**
