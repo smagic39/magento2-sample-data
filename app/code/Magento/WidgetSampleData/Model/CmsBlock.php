@@ -5,7 +5,6 @@
  */
 namespace Magento\WidgetSampleData\Model;
 
-use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -60,7 +59,7 @@ class CmsBlock
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
      * @param \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
-     * @param Json|null $serializer
+     * @param \Zend\Serializer\Adapter\Json $serializer
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -69,7 +68,7 @@ class CmsBlock
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
         \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory,
-        Json $serializer = null
+        \Zend\Serializer\Adapter\Json $serializer
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -78,7 +77,7 @@ class CmsBlock
         $this->cmsBlockFactory = $cmsBlockFactory;
         $this->appCollectionFactory = $appCollectionFactory;
         $this->categoryFactory = $categoryFactory;
-        $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()->get(Json::class);
+        $this->serializer = $serializer;
     }
 
     /**
